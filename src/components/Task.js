@@ -1,15 +1,18 @@
 function Task({title, completed}) {
     return(
-        <div className="task">
-            <div><h2>{title}</h2></div>
-            <div>
-                <p>treść zadania</p>
-                <div className="bottomTask">
-                    <div>{completed ? "wykonane" : "niewykonane"}</div>
-                </div>
+        <div className="fullTask">
+            {completed ? <div className="leftBar bar-c"/> : <div className="leftBar bar-n"/>}
+            <div className="task">
+                <div className="bar-g"/>
+                <div className="taskTitle">{title}</div>
                 <div>
-                    <button className="btn">Edytuj</button><button className="btn">Wykonane</button>
+                    {completed ? <button className="btn btn-n">Niewykonane</button> : <button className="btn btn-n-f">Niewykonane</button> }
+                    <button className="btn btn-p">W trakcie</button>
+                    {completed ? <button className="btn btn-c-f">Wykonane</button> : <button className="btn">Wykonane</button>}
                 </div>
+            </div>
+            <div className="taskBar">
+                <button>{completed ? "✎": "✘"}</button>
             </div>
         </div>
     );

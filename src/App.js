@@ -29,11 +29,15 @@ function App() {
     }
 
   return (
-    <div>
+    <div className='main'>
       <h1 className="header">ToDoList</h1>
       <div className="tasks">
-      {loadedData.map(({title, completed}) => (
-        <Task title={title} completed={completed}/>
+        <form className='createTask'>
+          <input type="text" className='createTaskTitle'></input>
+          <button className='btnAdd'>Dodaj Zadanie</button>
+        </form>
+      {loadedData.map(({title, completed, id}) => (
+        <Task key={id} title={title} completed={completed}/>
       ))}
       </div>
     </div>
