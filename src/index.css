@@ -77,6 +77,11 @@
     background-color: red;
 }
 
+.btn-p-f{
+    border: 1px solid yellow;
+    background-color: orange;
+}
+
 .createTask{
     display: flex;
     flex-direction: column;
@@ -108,6 +113,10 @@
 
 .bar-n{
     background-color: red;
+}
+
+.bar-p{
+    background-color: orange;
 }
 
 .btnAdd{

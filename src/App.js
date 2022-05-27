@@ -5,18 +5,14 @@ function App() {
 
     const [ isLoading, setLoading] = useState(true)
     const [ loadedData, setData] = useState([])
+    let title = null
 
     useEffect(() => {
-      fetch('https://jsonplaceholder.typicode.com/todos')
+      fetch('http://localhost:8080/toDo')
       .then(response => response.json())
       .then(data => {
-        let changedData = [];
-        for(let i = 0; i<10; i++)
-        {
-          changedData.push(data[i]) 
-        }
+          setData(data)
           setLoading(false)
-          setData(changedData)
       })
     }, [isLoading])
 
@@ -25,19 +21,37 @@ function App() {
         <section>
           <p>Loading...</p>
         </section>
-      );
+      )
+    }
+
+    const getTitle = (event) => {
+      title = event.target.value;
+      console.log(title)
+    }
+
+    const sendTitle = () => {
+      fetch("http://localhost:8080/toDo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({title: title}),
+      })
+        .then(() => {
+          setLoading(true)
+        })
     }
 
   return (
     <div className='main'>
       <h1 className="header">ToDoList</h1>
       <div className="tasks">
-        <form className='createTask'>
-          <input type="text" className='createTaskTitle'></input>
-          <button className='btnAdd'>Dodaj Zadanie</button>
-        </form>
+        <div className='createTask'>
+          <input type="text" id="title" name="title" className='createTaskTitle' onChange={getTitle}></input>
+          <button className='btnAdd' type='submit' onClick={sendTitle}>Dodaj Zadanie</button>
+        </div>
       {loadedData.map(({title, completed, id}) => (
-        <Task key={id} title={title} completed={completed}/>
+        <Task id={id} key={id} title={title} completed={completed} setLoading={setLoading}/>
       ))}
       </div>
     </div>
