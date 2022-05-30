@@ -41,10 +41,9 @@ function App() {
           setLoading(true)
         })
     }
-
   return (
     <div className='main'>
-      <h1 className="header">ToDoList</h1>
+      <h1 className="header"><div>ToDo List</div><div>☑</div></h1>
       <div className="tasks">
         <div className='createTask'>
           <input type="text" id="title" name="title" className='createTaskTitle' onChange={getTitle}></input>
@@ -54,6 +53,7 @@ function App() {
         <Task id={id} key={id} title={title} completed={completed} setLoading={setLoading}/>
       ))}
       </div>
+      {loadedData.length <= 0 ? <div className='noTasks'>"Nie masz żadnych zadań"</div> : null}
     </div>
   );
 }
